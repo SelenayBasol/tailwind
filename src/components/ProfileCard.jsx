@@ -1,8 +1,7 @@
 import React from 'react';
-
 const ProfileCard = ({ name, role, avatar, email, location, stats }) => {
   return (
-    <div className="max-w-sm mx-auto bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
       <div className="h-32 bg-gradient-to-r from-orange-200 to-orange-400"></div>
       
       <div className="relative px-6 pb-6">

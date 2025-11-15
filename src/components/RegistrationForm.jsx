@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const RegistrationForm = () => {
+const RegistrationPage = ({ onSuccess }) => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -57,159 +57,181 @@ const RegistrationForm = () => {
     
     if (Object.keys(newErrors).length === 0) {
       console.log('Form başarıyla gönderildi:', formData);
-      alert('Kayıt başarılı!');
+
+      onSuccess(formData);
     } else {
       setErrors(newErrors);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg p-8">
-      <h2 className="text-3xl font-bold text-orange-400 mb-6 text-center">Kayıt Ol</h2>
-      
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Ad Soyad *
-          </label>
-          <input
-            type="text"
-            name="fullName"
-            value={formData.fullName}
-            onChange={handleChange}
-            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none ${
-              errors.fullName ? 'border-red-500' : 'border-gray-300'
-            }`}
-            placeholder="Adınız ve soyadınız"
-          />
-          {errors.fullName && (
-            <p className="mt-1 text-sm text-red-500">{errors.fullName}</p>
-          )}
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100 flex items-center justify-center py-12 px-4">
+      <div className="max-w-md w-full">
+
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-400 rounded-full mb-4">
+            <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          </div>
+          <h1 className="text-3xl font-bold text-gray-800">Hoş Geldiniz</h1>
+          <p className="text-gray-600 mt-2">Hesap oluşturun ve başlayın</p>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Email *
-          </label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none ${
-              errors.email ? 'border-red-500' : 'border-gray-300'
-            }`}
-            placeholder="ornek@email.com"
-          />
-          {errors.email && (
-            <p className="mt-1 text-sm text-red-500">{errors.email}</p>
-          )}
+
+        <div className="bg-white rounded-xl shadow-lg p-8">
+          <h2 className="text-2xl font-bold text-orange-400 mb-6 text-center">Kayıt Ol</h2>
+          
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Ad Soyad *
+              </label>
+              <input
+                type="text"
+                name="fullName"
+                value={formData.fullName}
+                onChange={handleChange}
+                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent outline-none transition-all ${
+                  errors.fullName ? 'border-red-500' : 'border-gray-300'
+                }`}
+                placeholder="Adınız ve soyadınız"
+              />
+              {errors.fullName && (
+                <p className="mt-1 text-sm text-red-500">{errors.fullName}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Email *
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent outline-none transition-all ${
+                  errors.email ? 'border-red-500' : 'border-gray-300'
+                }`}
+                placeholder="ornek@email.com"
+              />
+              {errors.email && (
+                <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Telefon
+              </label>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent outline-none transition-all"
+                placeholder="0555 555 55 55"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Şifre *
+              </label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent outline-none transition-all ${
+                  errors.password ? 'border-red-500' : 'border-gray-300'
+                }`}
+                placeholder="••••••••"
+              />
+              {errors.password && (
+                <p className="mt-1 text-sm text-red-500">{errors.password}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Şifre Tekrar *
+              </label>
+              <input
+                type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent outline-none transition-all ${
+                  errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
+                }`}
+                placeholder="••••••••"
+              />
+              {errors.confirmPassword && (
+                <p className="mt-1 text-sm text-red-500">{errors.confirmPassword}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Ülke
+              </label>
+              <select
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent outline-none transition-all"
+              >
+                <option value="">Seçiniz</option>
+                <option value="tr">Türkiye</option>
+                <option value="us">Amerika</option>
+                <option value="uk">İngiltere</option>
+                <option value="de">Almanya</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  name="agreeTerms"
+                  checked={formData.agreeTerms}
+                  onChange={handleChange}
+                  className="h-4 w-4 text-orange-400 focus:ring-orange-400 border-gray-300 rounded"
+                />
+                <span className="ml-2 text-sm text-gray-700">
+                  Kullanım şartlarını kabul ediyorum *
+                </span>
+              </label>
+              {errors.agreeTerms && (
+                <p className="mt-1 text-sm text-red-500">{errors.agreeTerms}</p>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-orange-400 hover:bg-orange-500 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 mt-6"
+            >
+              Kayıt Ol
+            </button>
+          </form>
+
+          <p className="mt-6 text-center text-sm text-gray-600">
+            Zaten hesabın var mı?{' '}
+            <a href="#" className="text-orange-400 hover:text-orange-500 font-medium">
+              Giriş Yap
+            </a>
+          </p>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Telefon
-          </label>
-          <input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-            placeholder="0555 555 55 55"
-          />
-        </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Şifre *
-          </label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none ${
-              errors.password ? 'border-red-500' : 'border-gray-300'
-            }`}
-            placeholder="••••••••"
-          />
-          {errors.password && (
-            <p className="mt-1 text-sm text-red-500">{errors.password}</p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Şifre Tekrar *
-          </label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none ${
-              errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
-            }`}
-            placeholder="••••••••"
-          />
-          {errors.confirmPassword && (
-            <p className="mt-1 text-sm text-red-500">{errors.confirmPassword}</p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Ülke
-          </label>
-          <select
-            name="country"
-            value={formData.country}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-          >
-            <option value="">Seçiniz</option>
-            <option value="tr">Türkiye</option>
-            <option value="us">Amerika</option>
-            <option value="uk">İngiltere</option>
-            <option value="de">Almanya</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="flex items-center">
-            <input
-              type="checkbox"
-              name="agreeTerms"
-              checked={formData.agreeTerms}
-              onChange={handleChange}
-              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-            />
-            <span className="ml-2 text-sm text-gray-700">
-              Kullanım şartlarını kabul ediyorum *
-            </span>
-          </label>
-          {errors.agreeTerms && (
-            <p className="mt-1 text-sm text-red-500">{errors.agreeTerms}</p>
-          )}
-        </div>
-
-        <button
-          type="submit"
-          className="w-full bg-orange-200 hover:bg-orange-400 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 mt-6"
-        >
-          Kayıt Ol
-        </button>
-      </form>
-
-      <p className="mt-4 text-center text-sm text-gray-600">
-        Zaten hesabın var mı?{' '}
-        <a href="#" className="text-orange-200 hover:text-orange-500 font-medium">
-          Giriş Yap
-        </a>
-      </p>
+        <p className="mt-8 text-center text-sm text-gray-500">
+          © 2025 Selenay Basic App. Tüm hakları saklıdır.
+        </p>
+      </div>
     </div>
   );
 };
 
-export default RegistrationForm;
+export default RegistrationPage;

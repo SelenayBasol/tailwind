@@ -40,7 +40,7 @@ const DataTable = ({ data, columns }) => {
         <input
           type="text"
           placeholder="Tabloda ara..."
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-transparent outline-none"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
